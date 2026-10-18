@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <rect width="240" height="240" fill="#eee"/>
+  <circle cx="120" cy="76" r="36" fill="#bbb"/>
+  <path d="M42 200v-18a78 66 0 0 1 156 0v18Z" fill="#bbb"/>
+  <text x="120" y="224" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#777">Headshot</text>
+</svg>

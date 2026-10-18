@@ -1,0 +1,44 @@
+---
+layout: default
+---
+{{ content }}
+
+{% assign project_limit = page.project_limit | default: site.data.projects.size %}
+{% assign files = site.static_files | sort: 'path' %}
+<div class="row project-list">
+  {% for project in site.data.projects limit: project_limit %}
+    {% assign folder = '/Images/' | append: project.folder | append: '/' %}
+    {% assign preferred_cover = folder | append: project.cover %}
+    {% assign cover = '' %}
+    {% comment %}Use the first photo, unless a cover filename is set in the project data.{% endcomment %}
+    {% for file in files %}
+      {% assign extension = file.extname | downcase %}
+      {% if file.path contains folder and site.image_extensions contains extension %}
+        {% if cover == '' %}{% assign cover = file.path %}{% endif %}
+        {% if file.path == preferred_cover %}
+          {% assign cover = file.path %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign image_alt = project.name | append: ' project photo' %}
+    {% if cover == '' %}
+      {% assign cover = '/Images/project-placeholder.svg' %}
+      {% assign image_alt = project.name | append: ': photo to add' %}
+    {% endif %}
+    {% assign project_url = '/projects/' | append: project.id | append: '.html' %}
+    <div class="col-md-4 portfolio-item" id="{{ project.id }}">
+      <a class="project-link" href="{{ project_url | relative_url }}">
+        <h3>{{ project.name | escape }}</h3>
+        <img class="img-responsive img-thumbnail project-thumbnail"
+             src="{{ cover | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url }}"
+             alt="{{ image_alt | escape }}" loading="lazy" decoding="async">
+      </a>
+      <p>{{ project.description | escape }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+{% if page.home %}
+  <p><a class="btn btn-default" href="{{ '/projects.html' | relative_url }}">View all projects &raquo;</a></p>
+{% endif %}

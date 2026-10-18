@@ -1,44 +1,23 @@
 ---
-layout: default
+layout: project-list
 title: My super amazing so cool website
 description: A collection of Rollo Tully's aircraft, software, and other projects.
 home: true
+project_limit: 3
 ---
 <h1 class="page-header">Welcome to my super awesome web 2.0 site, amaze!</h1>
 
-<h2 id="projects">Projects <small>Stuff I've worked on over the years</small></h2>
+<section class="row bio" aria-labelledby="bio-heading">
+  <div class="col-sm-3">
+    <img class="img-responsive img-thumbnail bio-headshot"
+         src="{{ site.data.bio.headshot | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url }}"
+         alt="Headshot" width="240" height="240">
+  </div>
+  <div class="col-sm-9">
+    <h2 id="bio-heading">Bio</h2>
+    <h3>{{ site.data.bio.name | escape }}</h3>
+    <p>{{ site.data.bio.blurb | escape }}</p>
+  </div>
+</section>
 
-{% assign files = site.static_files | sort: 'path' %}
-<div class="row project-list">
-  {% for project in site.data.projects %}
-    {% assign folder = '/Images/' | append: project.folder | append: '/' %}
-    {% assign preferred_cover = folder | append: project.cover %}
-    {% assign cover = '' %}
-    {% comment %}Use the first photo, unless a cover filename is set in the project data.{% endcomment %}
-    {% for file in files %}
-      {% assign extension = file.extname | downcase %}
-      {% if file.path contains folder and site.image_extensions contains extension %}
-        {% if cover == '' %}{% assign cover = file.path %}{% endif %}
-        {% if file.path == preferred_cover %}
-          {% assign cover = file.path %}
-          {% break %}
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-    {% assign image_alt = project.name | append: ' project photo' %}
-    {% if cover == '' %}
-      {% assign cover = '/Images/project-placeholder.svg' %}
-      {% assign image_alt = project.name | append: ': photo to add' %}
-    {% endif %}
-    {% assign project_url = '/projects/' | append: project.id | append: '.html' %}
-    <div class="col-md-4 portfolio-item" id="{{ project.id }}">
-      <a class="project-link" href="{{ project_url | relative_url }}">
-        <h3>{{ project.name | escape }}</h3>
-        <img class="img-responsive img-thumbnail project-thumbnail"
-             src="{{ cover | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url }}"
-             alt="{{ image_alt | escape }}" loading="lazy" decoding="async">
-      </a>
-      <p>{{ project.description | escape }}</p>
-    </div>
-  {% endfor %}
-</div>
+<h2 id="projects">Projects <small>Stuff I've worked on over the years</small></h2>

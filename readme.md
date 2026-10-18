@@ -1,8 +1,19 @@
 # Rollo Tully's super amazing website
 
-The original Bootstrap 3 styling, with projects on the homepage and a gallery
-for each project. GitHub Pages' Jekyll build discovers photos and videos automatically;
+The original Bootstrap 3 styling, with a homepage bio, three featured projects,
+a full Projects page and a gallery for each project. GitHub Pages' Jekyll build discovers photos and videos automatically;
 there is no image list to maintain and no browser API request to GitHub.
+
+## Homepage bio and project lists
+
+Edit `_data/bio.yml` to change the name, short blurb and headshot image path.
+The initial blurb and headshot are placeholders. Add your photo under `Images/`
+and point `headshot` at it, for example `/Images/headshot.jpg`.
+
+The homepage shows only the first three entries in `_data/projects.yml`, below
+the bio. Reorder that file to change which projects appear. `projects.html`
+shows the complete list with the same grid, without the bio. Both pages use
+`_layouts/project-list.html`, so their project cards stay consistent.
 
 ## Adding photos and videos
 
@@ -19,8 +30,6 @@ there is no image list to maintain and no browser API request to GitHub.
 | Halcyon | `Images/Halcyon/` |
 | Meteosat Image reception | `Images/Sat decoding/` |
 | Highspeed Photography | `Images/Highspeed Photography/` |
-| CAMO GAN | `Images/CAMO GAN/` |
-| Boggle Engine | `Images/Boggle Engine/` |
 | X-Band SAR | `Images/X-Band SAR/` |
 
 Images: JPG/JPEG, PNG, GIF, WebP, AVIF and SVG. Videos: MP4 and WebM.
@@ -50,7 +59,7 @@ uploading the site. The repository settings have not been changed by this patch.
 For a local preview, install Jekyll and run `jekyll serve` from this folder.
 Opening the source `index.html` directly will show template code instead.
 
-The old `projects.html` address sends visitors to the homepage's Projects section.
+Navigation and gallery back links lead to the full Projects page.
 The existing Munro Map content is retained.
 
 Reference: [GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll).

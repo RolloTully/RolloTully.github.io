@@ -20,11 +20,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ '/index.html' | relative_url }}">Home</a>
+          <a class="navbar-brand" href="{{ '/index.html' | relative_url }}"{% if page.home %} aria-current="page"{% endif %}>Home</a>
         </div>
         <div class="collapse navbar-collapse" id="site-navigation">
           <ul class="nav navbar-nav">
-            <li{% if page.home or page.project %} class="active"{% endif %}><a href="{{ '/index.html#projects' | relative_url }}">Projects</a></li>
+            <li{% if page.projects or page.project %} class="active"{% endif %}><a href="{{ '/projects.html' | relative_url }}">Projects</a></li>
             <li><a href="https://github.com/RolloTully">GitHub</a></li>
             <li><a href="{{ '/munro_map.html' | relative_url }}">Munro Map</a></li>
           </ul>

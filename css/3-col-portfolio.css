@@ -2,6 +2,22 @@ body {
 	margin-top: 50px; /* Space for the fixed Bootstrap navbar. */
 }
 
+.bio {
+	margin-bottom: 30px;
+}
+
+.bio h2 {
+	margin-top: 0;
+}
+
+.bio-headshot {
+	width: 100%;
+	max-width: 240px;
+	aspect-ratio: 1;
+	object-fit: cover;
+	margin-bottom: 20px;
+}
+
 .portfolio-item {
 	margin-bottom: 25px;
 }
