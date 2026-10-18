@@ -9,6 +9,11 @@ layout: default
 <h1 class="page-header">{{ project.name | escape }}</h1>
 <p><a href="{{ '/projects.html' | relative_url }}#{{ project.id }}">&laquo; Back to projects</a></p>
 
+<section class="project-intro" aria-labelledby="intro-heading">
+  <h2 id="intro-heading">Intro</h2>
+  {{ project.intro | default: project.description | markdownify }}
+</section>
+
 <div class="project-gallery">
   {% comment %}Discover photos and videos at build time; no HTML edits needed.{% endcomment %}
   {% for file in files %}
