@@ -1,82 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+---
+layout: default
+title: My super amazing so cool website
+description: A collection of Rollo Tully's aircraft, software, and other projects.
+home: true
+---
+<h1 class="page-header">Welcome to my super awesome web 2.0 site, amaze!</h1>
 
-    <title>My super amazing so cool website</title>
+<h2 id="projects">Projects <small>Stuff I've worked on over the years</small></h2>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS for the '3 Col Portfolio' Template -->
-    <link href="css/3-col-portfolio.css" rel="stylesheet">
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="./index.html">Home</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="./skills.html">Skills</a></li>
-            <li><a href="./projects.html">Projects</a></li>
-            <li><a href="https://github.com/RolloTully">GitHub</a></li>
-            <li><a href="./tools">Tools</a></li>
-            <li><a href="./tools">Munro Map</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav>
-
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col-lg-12">
-          <h1 class="page-header">Welcome to my super awesome web 2.0 site, amaze!</h1>
-          <h2> Bio: </h2>
-          <h3> Who am I? </h3>
-        </div>
-
-      </div>
-      <hr>
-    </div><!-- /.container -->
-
-    <div class="container">
-
-      <hr>
-
-      <footer>
-        <div class="row">
-          <div class="col-lg-12">
-            <p>Copyright &copy; Company <span id="getCurrentDate"></span></p>
-          </div>
-        </div>
-      </footer>
-
-    </div><!-- /.container -->
-
-    <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script type="text/javascript">
-      var dt = new Date();
-      document.getElementById('getCurrentDate').innerHTML = dt.getFullYear();
-    </script>
-  </body>
-
-</html>
+{% assign files = site.static_files | sort: 'path' %}
+<div class="row project-list">
+  {% for project in site.data.projects %}
+    {% assign folder = '/Images/' | append: project.folder | append: '/' %}
+    {% assign preferred_cover = folder | append: project.cover %}
+    {% assign cover = '' %}
+    {% comment %}Use the first photo, unless a cover filename is set in the project data.{% endcomment %}
+    {% for file in files %}
+      {% assign extension = file.extname | downcase %}
+      {% if file.path contains folder and site.image_extensions contains extension %}
+        {% if cover == '' %}{% assign cover = file.path %}{% endif %}
+        {% if file.path == preferred_cover %}
+          {% assign cover = file.path %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign image_alt = project.name | append: ' project photo' %}
+    {% if cover == '' %}
+      {% assign cover = '/Images/project-placeholder.svg' %}
+      {% assign image_alt = project.name | append: ': photo to add' %}
+    {% endif %}
+    {% assign project_url = '/projects/' | append: project.id | append: '.html' %}
+    <div class="col-md-4 portfolio-item" id="{{ project.id }}">
+      <a class="project-link" href="{{ project_url | relative_url }}">
+        <h3>{{ project.name | escape }}</h3>
+        <img class="img-responsive img-thumbnail project-thumbnail"
+             src="{{ cover | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url }}"
+             alt="{{ image_alt | escape }}" loading="lazy" decoding="async">
+      </a>
+      <p>{{ project.description | escape }}</p>
+    </div>
+  {% endfor %}
+</div>

@@ -1,9 +1,46 @@
 body {
-	margin-top: 50px; /* 50px is the height of the navbar - change this if the navbarn height changes */
+	margin-top: 50px; /* Space for the fixed Bootstrap navbar. */
 }
 
 .portfolio-item {
 	margin-bottom: 25px;
+}
+
+#projects,
+.portfolio-item {
+	scroll-margin-top: 70px;
+}
+
+.project-link {
+	display: block;
+}
+
+.project-thumbnail {
+	width: 100%;
+	aspect-ratio: 7 / 4;
+	object-fit: cover;
+	background: #eee;
+}
+
+.project-list p {
+	margin-top: 10px;
+}
+
+/* Start each desktop row cleanly when descriptions have different lengths. */
+@media (min-width: 992px) {
+	.project-list .portfolio-item:nth-child(3n + 1) {
+		clear: left;
+	}
+}
+
+.gallery-photo {
+	display: block;
+	margin-bottom: 25px;
+}
+
+.project-gallery img {
+	display: block;
+	margin: 0 auto 10px;
 }
 
 footer {

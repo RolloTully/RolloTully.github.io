@@ -1,0 +1,5 @@
+title: Rollo Tully
+url: https://rollotully.github.io
+baseurl: ""
+image_extensions: [".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif", ".svg"]
+exclude: [readme.md, Gemfile, Gemfile.lock]

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{% assign project = site.data.projects | where: 'id', page.project | first %}
+{% assign folder = '/Images/' | append: project.folder | append: '/' %}
+{% assign files = site.static_files | sort: 'path' %}
+{% assign photo_count = 0 %}
+
+<h1 class="page-header">{{ project.name | escape }}</h1>
+<p><a href="{{ '/index.html' | relative_url }}#{{ project.id }}">&laquo; Back to projects</a></p>
+
+<div class="project-gallery">
+  {% comment %}Discover images at build time; adding photos never needs an HTML edit.{% endcomment %}
+  {% for file in files %}
+    {% assign extension = file.extname | downcase %}
+    {% if file.path contains folder and site.image_extensions contains extension %}
+      {% assign photo_count = photo_count | plus: 1 %}
+      {% assign image_url = file.path | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url %}
+      <a class="gallery-photo" href="{{ image_url }}">
+        <img class="img-responsive img-thumbnail" src="{{ image_url }}"
+             alt="{{ project.name | escape }} photo {{ photo_count }}: {{ file.basename | escape }}"
+             loading="lazy" decoding="async">
+      </a>
+    {% endif %}
+  {% endfor %}
+  {% if photo_count == 0 %}
+    <img class="img-responsive img-thumbnail" src="{{ '/Images/project-placeholder.svg' | relative_url }}"
+         alt="{{ project.name | escape }}: photo to add" width="700" height="400">
+    <p class="text-muted">No photos yet.</p>
+  {% endif %}
+</div>
