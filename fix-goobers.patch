@@ -1,0 +1,27 @@
+diff --git a/_data/projects.yml b/_data/projects.yml
+index 6e12298..26c86c9 100644
+--- a/_data/projects.yml
++++ b/_data/projects.yml
+@@ -29,10 +29,9 @@
+   intro: |-
+     Images from my attempts to receive and decode weather satellite signals.
+ 
+-- id: goober
++- id: goobers
+   name: Goobers
+   folder: Goobers
+-  cover: Meteosat Title Image.jpg
+   description: Animals that have that sauce.
+   intro: |-
+     From time to time I encounter animals that I feel have a certain quality, an air in there expresion that confidently speaks to me, and what they are saying is, "I am... a goober", here i present... the goobers.
+diff --git a/projects/goobers.html b/projects/goobers.html
+index 37e2c82..b813b55 100644
+--- a/projects/goobers.html
++++ b/projects/goobers.html
+@@ -1,5 +1,5 @@
+ ---
+ layout: gallery
+ title: Goobers - Rollo Tully
+-project: Goobers
++project: goobers
+ ---
