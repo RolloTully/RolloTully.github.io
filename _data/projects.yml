@@ -13,6 +13,12 @@
     An all-electric heavy-lift UAS built for the BMFA payload challenge.
     Just 685g with its battery, and still able to carry the full payload of 4kg.
 
+- id: meteosat
+  name: Meteosat Image reception
+  folder: Sat decoding
+  cover: Meteosat Title Image.jpg
+  description: Images from my attempts to receive and decode weather satellite signals.
+
 - id: swarmcut
   name: SwarmCut
   folder: SwarmCut
@@ -25,12 +31,6 @@
   folder: Halcyon
   cover: Halcyon_Render_Front.png
   description: UoM UAV's entry to the 2022 IMechE UAS Challenge.
-
-- id: meteosat
-  name: Meteosat Image reception
-  folder: Sat decoding
-  cover: Meteosat Title Image.jpg
-  description: Images from my attempts to receive and decode weather satellite signals.
 
 - id: highspeed-photography
   name: Highspeed Photography
