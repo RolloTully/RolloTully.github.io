@@ -33,14 +33,22 @@ body {
 	}
 }
 
-.gallery-photo {
+.gallery-photo,
+.gallery-video {
 	display: block;
 	margin-bottom: 25px;
 }
 
-.project-gallery img {
+.project-gallery img,
+.project-gallery video {
 	display: block;
 	margin: 0 auto 10px;
+}
+
+.project-gallery video {
+	width: 100%;
+	max-height: 80vh;
+	object-fit: contain;
 }
 
 footer {
