@@ -2,4 +2,7 @@ title: Rollo Tully
 url: https://rollotully.github.io
 baseurl: ""
 image_extensions: [".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif", ".svg"]
+video_types:
+  ".mp4": video/mp4
+  ".webm": video/webm
 exclude: [readme.md, Gemfile, Gemfile.lock]
