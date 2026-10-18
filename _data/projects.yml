@@ -11,7 +11,7 @@
   cover: 20220615_124311.jpg
   description: >-
     An all-electric heavy-lift UAS built for the BMFA payload challenge.
-    Just 685g with its battery, and still able to carry the full payload.
+    Just 685g with its battery, and still able to carry the full payload of 4kg.
 
 - id: swarmcut
   name: SwarmCut
@@ -38,17 +38,6 @@
   cover: PICT0084.JPG
   description: Playing around with high-speed photography over the years, with mixed success.
 
-- id: camo-gan
-  name: CAMO GAN
-  folder: CAMO GAN
-  description: >-
-    An attempt to use a generative adversarial network to design better
-    camouflage patterns for different terrain and environments.
-
-- id: boggle-engine
-  name: Boggle Engine
-  folder: Boggle Engine
-  description: A computer-vision-driven game engine to 'cheat' at the classic board game Boggle.
 
 - id: x-band-sar
   name: X-Band SAR
