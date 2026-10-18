@@ -20,12 +20,11 @@ layout: default
         {% assign media_url = file.path | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url %}
         {% if video_type %}
           <div class="gallery-video">
-            <video class="img-thumbnail" controls playsinline preload="metadata"
+            <video class="img-thumbnail" controls controlslist="nodownload" playsinline preload="metadata"
                    aria-label="{{ project.name | escape }} video: {{ file.basename | escape }}">
               <source src="{{ media_url }}" type="{{ video_type }}">
               Your browser does not support video playback.
             </video>
-            <p><a href="{{ media_url }}" download>Download video</a></p>
           </div>
         {% else %}
           <a class="gallery-photo" href="{{ media_url }}">
