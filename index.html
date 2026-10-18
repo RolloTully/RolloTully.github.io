@@ -16,7 +16,7 @@ project_limit: 3
   <div class="col-sm-9">
     <h2 id="bio-heading">Bio</h2>
     <h3>{{ site.data.bio.name | escape }}</h3>
-    <p>{{ site.data.bio.blurb | escape | replace: '\n', '<br />' | newline_to_br }}</p>
+    <div class="bio-blurb">{{ site.data.bio.blurb | replace: '\n', '<br />' | newline_to_br | markdownify }}</div>
   </div>
 </section>
 

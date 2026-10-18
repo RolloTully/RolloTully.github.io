@@ -54,10 +54,20 @@ body {
 	margin-bottom: 30px;
 }
 
-.gallery-photo,
-.gallery-video {
+.project-gallery {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 25px 30px;
+	align-items: start;
+}
+
+.gallery-item {
+	min-width: 0;
+	margin: 0;
+}
+
+.gallery-photo {
 	display: block;
-	margin-bottom: 25px;
 }
 
 .project-gallery img,
@@ -68,8 +78,20 @@ body {
 
 .project-gallery video {
 	width: 100%;
-	max-height: 80vh;
+	max-height: 50vh;
 	object-fit: contain;
+}
+
+.project-gallery figcaption {
+	margin-top: 5px;
+	text-align: center;
+	white-space: pre-line;
+}
+
+@media (max-width: 767px) {
+	.project-gallery {
+		grid-template-columns: 1fr;
+	}
 }
 
 footer {

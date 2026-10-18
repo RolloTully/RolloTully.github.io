@@ -1,0 +1,145 @@
+diff --git a/_data/bio.yml b/_data/bio.yml
+index f7ab74d..8127c8c 100644
+--- a/_data/bio.yml
++++ b/_data/bio.yml
+@@ -1,9 +1,9 @@
+ name: Rollo Tully
+ headshot: /Images/headshot.jpg
+-# Keep |- to preserve newlines; blank lines separate paragraphs.
++# Keep |- to preserve newlines. Markdown links are supported too.
+ blurb: |-
+   Hello! Welcome to my super legit web 2.0 project portfolio, featuring only the finest formatting 2001 has to offer. Here you can find some of the more successful projects I've worked on, either on my own or with teams of friends and colleagues.
+ 
+   This page gets updated from time to time as projects mature into things I feel are worthy of seeing the light of day. I hope it goes without saying that behind this site is a graveyard of failed projects that may or may not be propped up again one day. Those that got anywhere live on my GitHub as messy codebases. Feel free to dig around.
+ 
+-  I'm currently a PhD candidate at the University of Manchester's Digital Manufacturing Lab. My work focuses on using computational methods to design passively morphing adaptive flow actuators (very fancy bendy propellers).
++  I'm currently a PhD candidate at the University of Manchester's [Digital Manufacturing Lab](https://digitalmanufacturing.uk/). My work focuses on using computational methods to design passively morphing adaptive flow actuators (very fancy bendy propellers).
+diff --git a/_data/captions.yml b/_data/captions.yml
+new file mode 100644
+index 0000000..750fc41
+--- /dev/null
++++ b/_data/captions.yml
+@@ -0,0 +1,6 @@
++# Optional captions for gallery photos and videos.
++# Use the project id from projects.yml, then the exact filename (case matters).
++# Omit an entry or leave it empty to show the media without a caption.
++# Example: PICT0041.JPG: "Add your caption here."
++goobers:
++  PICT0041.JPG: ""
+diff --git a/_layouts/gallery.html b/_layouts/gallery.html
+index e8ff9d3..00c6120 100644
+--- a/_layouts/gallery.html
++++ b/_layouts/gallery.html
+@@ -23,27 +23,34 @@ layout: default
+       {% if site.image_extensions contains extension or video_type %}
+         {% assign media_count = media_count | plus: 1 %}
+         {% assign media_url = file.path | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url %}
+-        {% if video_type %}
+-          <div class="gallery-video">
++        {% assign filename = file.path | split: '/' | last %}
++        {% assign caption = site.data.captions[project.id][filename] %}
++        <figure class="gallery-item">
++          {% if video_type %}
+             <video class="img-thumbnail" controls controlslist="nodownload" playsinline preload="metadata"
+                    aria-label="{{ project.name | escape }} video: {{ file.basename | escape }}">
+               <source src="{{ media_url }}" type="{{ video_type }}">
+               Your browser does not support video playback.
+             </video>
+-          </div>
+-        {% else %}
+-          <a class="gallery-photo" href="{{ media_url }}">
+-            <img class="img-responsive img-thumbnail" src="{{ media_url }}"
+-                 alt="{{ project.name | escape }} photo {{ media_count }}: {{ file.basename | escape }}"
+-                 loading="lazy" decoding="async">
+-          </a>
+-        {% endif %}
++          {% else %}
++            <a class="gallery-photo" href="{{ media_url }}">
++              <img class="img-responsive img-thumbnail" src="{{ media_url }}"
++                   alt="{{ project.name | escape }} photo {{ media_count }}: {{ file.basename | escape }}"
++                   loading="lazy" decoding="async">
++            </a>
++          {% endif %}
++          {% if caption and caption != '' %}
++            <figcaption class="text-muted">{{ caption | escape }}</figcaption>
++          {% endif %}
++        </figure>
+       {% endif %}
+     {% endif %}
+   {% endfor %}
+   {% if media_count == 0 %}
+-    <img class="img-responsive img-thumbnail" src="{{ '/Images/project-placeholder.svg' | relative_url }}"
+-         alt="{{ project.name | escape }}: photo to add" width="700" height="400">
+-    <p class="text-muted">No photos or videos yet.</p>
++    <div class="gallery-item">
++      <img class="img-responsive img-thumbnail" src="{{ '/Images/project-placeholder.svg' | relative_url }}"
++           alt="{{ project.name | escape }}: photo to add" width="700" height="400">
++      <p class="text-muted">No photos or videos yet.</p>
++    </div>
+   {% endif %}
+ </div>
+diff --git a/css/3-col-portfolio.css b/css/3-col-portfolio.css
+index f64b467..c0a5fe3 100644
+--- a/css/3-col-portfolio.css
++++ b/css/3-col-portfolio.css
+@@ -54,10 +54,20 @@ body {
+ 	margin-bottom: 30px;
+ }
+ 
+-.gallery-photo,
+-.gallery-video {
++.project-gallery {
++	display: grid;
++	grid-template-columns: repeat(2, minmax(0, 1fr));
++	gap: 25px 30px;
++	align-items: start;
++}
++
++.gallery-item {
++	min-width: 0;
++	margin: 0;
++}
++
++.gallery-photo {
+ 	display: block;
+-	margin-bottom: 25px;
+ }
+ 
+ .project-gallery img,
+@@ -68,10 +78,22 @@ body {
+ 
+ .project-gallery video {
+ 	width: 100%;
+-	max-height: 80vh;
++	max-height: 50vh;
+ 	object-fit: contain;
+ }
+ 
++.project-gallery figcaption {
++	margin-top: 5px;
++	text-align: center;
++	white-space: pre-line;
++}
++
++@media (max-width: 767px) {
++	.project-gallery {
++		grid-template-columns: 1fr;
++	}
++}
++
+ footer {
+ 	margin: 50px 0;
+ }
+diff --git a/index.html b/index.html
+index 7ecb0aa..4d01075 100644
+--- a/index.html
++++ b/index.html
+@@ -16,7 +16,7 @@ project_limit: 3
+   <div class="col-sm-9">
+     <h2 id="bio-heading">Bio</h2>
+     <h3>{{ site.data.bio.name | escape }}</h3>
+-    <p>{{ site.data.bio.blurb | escape | replace: '\n', '<br />' | newline_to_br }}</p>
++    <div class="bio-blurb">{{ site.data.bio.blurb | replace: '\n', '<br />' | newline_to_br | markdownify }}</div>
+   </div>
+ </section>
+ 

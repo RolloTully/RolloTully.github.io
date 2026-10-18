@@ -1,9 +1,9 @@
 name: Rollo Tully
 headshot: /Images/headshot.jpg
-# Keep |- to preserve newlines; blank lines separate paragraphs.
+# Keep |- to preserve newlines. Markdown links are supported too.
 blurb: |-
   Hello! Welcome to my super legit web 2.0 project portfolio, featuring only the finest formatting 2001 has to offer. Here you can find some of the more successful projects I've worked on, either on my own or with teams of friends and colleagues.
 
   This page gets updated from time to time as projects mature into things I feel are worthy of seeing the light of day. I hope it goes without saying that behind this site is a graveyard of failed projects that may or may not be propped up again one day. Those that got anywhere live on my GitHub as messy codebases. Feel free to dig around.
 
-  I'm currently a PhD candidate at the University of Manchester's Digital Manufacturing Lab. My work focuses on using computational methods to design passively morphing adaptive flow actuators (very fancy bendy propellers).
+  I'm currently a PhD candidate at the University of Manchester's [Digital Manufacturing Lab](https://digitalmanufacturing.uk/). My work focuses on using computational methods to design passively morphing adaptive flow actuators (very fancy bendy propellers).

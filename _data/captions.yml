@@ -1,0 +1,6 @@
+# Optional captions for gallery photos and videos.
+# Use the project id from projects.yml, then the exact filename (case matters).
+# Omit an entry or leave it empty to show the media without a caption.
+# Example: PICT0041.JPG: "Add your caption here."
+goobers:
+  PICT0041.JPG: ""

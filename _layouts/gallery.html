@@ -23,27 +23,34 @@ layout: default
       {% if site.image_extensions contains extension or video_type %}
         {% assign media_count = media_count | plus: 1 %}
         {% assign media_url = file.path | url_encode | replace: '+', '%20' | replace: '%2F', '/' | relative_url %}
-        {% if video_type %}
-          <div class="gallery-video">
+        {% assign filename = file.path | split: '/' | last %}
+        {% assign caption = site.data.captions[project.id][filename] %}
+        <figure class="gallery-item">
+          {% if video_type %}
             <video class="img-thumbnail" controls controlslist="nodownload" playsinline preload="metadata"
                    aria-label="{{ project.name | escape }} video: {{ file.basename | escape }}">
               <source src="{{ media_url }}" type="{{ video_type }}">
               Your browser does not support video playback.
             </video>
-          </div>
-        {% else %}
-          <a class="gallery-photo" href="{{ media_url }}">
-            <img class="img-responsive img-thumbnail" src="{{ media_url }}"
-                 alt="{{ project.name | escape }} photo {{ media_count }}: {{ file.basename | escape }}"
-                 loading="lazy" decoding="async">
-          </a>
-        {% endif %}
+          {% else %}
+            <a class="gallery-photo" href="{{ media_url }}">
+              <img class="img-responsive img-thumbnail" src="{{ media_url }}"
+                   alt="{{ project.name | escape }} photo {{ media_count }}: {{ file.basename | escape }}"
+                   loading="lazy" decoding="async">
+            </a>
+          {% endif %}
+          {% if caption and caption != '' %}
+            <figcaption class="text-muted">{{ caption | escape }}</figcaption>
+          {% endif %}
+        </figure>
       {% endif %}
     {% endif %}
   {% endfor %}
   {% if media_count == 0 %}
-    <img class="img-responsive img-thumbnail" src="{{ '/Images/project-placeholder.svg' | relative_url }}"
-         alt="{{ project.name | escape }}: photo to add" width="700" height="400">
-    <p class="text-muted">No photos or videos yet.</p>
+    <div class="gallery-item">
+      <img class="img-responsive img-thumbnail" src="{{ '/Images/project-placeholder.svg' | relative_url }}"
+           alt="{{ project.name | escape }}: photo to add" width="700" height="400">
+      <p class="text-muted">No photos or videos yet.</p>
+    </div>
   {% endif %}
 </div>
