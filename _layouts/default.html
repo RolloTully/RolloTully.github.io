@@ -25,6 +25,7 @@
         <div class="collapse navbar-collapse" id="site-navigation">
           <ul class="nav navbar-nav">
             <li{% if page.projects or page.project %} class="active"{% endif %}><a href="{{ '/projects.html' | relative_url }}">Projects</a></li>
+            <li{% if page.openstand %} class="active"{% endif %}><a href="{{ '/openstand.html' | relative_url }}">OpenStand</a></li>
             <li><a href="https://github.com/RolloTully">GitHub</a></li>
             <li><a href="{{ '/munro_map.html' | relative_url }}">Munro Map</a></li>
           </ul>

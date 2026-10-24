@@ -1,0 +1,37 @@
+diff --git a/_layouts/default.html b/_layouts/default.html
+index aa0d963..7ccd4f7 100644
+--- a/_layouts/default.html
++++ b/_layouts/default.html
+@@ -25,6 +25,7 @@
+         <div class="collapse navbar-collapse" id="site-navigation">
+           <ul class="nav navbar-nav">
+             <li{% if page.projects or page.project %} class="active"{% endif %}><a href="{{ '/projects.html' | relative_url }}">Projects</a></li>
++            <li{% if page.openstand %} class="active"{% endif %}><a href="{{ '/openstand.html' | relative_url }}">OpenStand</a></li>
+             <li><a href="https://github.com/RolloTully">GitHub</a></li>
+             <li><a href="{{ '/munro_map.html' | relative_url }}">Munro Map</a></li>
+           </ul>
+diff --git a/munro_map.html b/munro_map.html
+index 2a1777a..f2fe9af 100644
+--- a/munro_map.html
++++ b/munro_map.html
+@@ -34,6 +34,7 @@
+           <ul class="nav navbar-nav">
+             <li><a href="./index.html">Home</a></li>
+             <li><a href="./projects.html">Projects</a></li>
++            <li><a href="./openstand.html">OpenStand</a></li>
+             <li><a href="https://github.com/RolloTully">GitHub</a></li>
+             <li><a href="./munro_map.html">Munro Map</a></li>
+           </ul>
+diff --git a/openstand.html b/openstand.html
+new file mode 100644
+index 0000000..a40c741
+--- /dev/null
++++ b/openstand.html
+@@ -0,0 +1,7 @@
++---
++layout: default
++title: OpenStand - Rollo Tully
++openstand: true
++---
++<h1 class="page-header">OpenStand</h1>
++<p>Details coming soon.</p>
